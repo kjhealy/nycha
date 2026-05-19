@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 # nycha <img src="man/figures/nycha.png" align="right" width="360">
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/kjhealy/nycha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kjhealy/nycha/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Spatial and tabular data about the New York City Housing Authority
