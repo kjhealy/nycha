@@ -1,0 +1,53 @@
+authors:
+  Kieran Healy:
+    href: http://kieranhealy.org
+
+url: https://kjhealy.github.io/nycha/
+template:
+  bootstrap: 5
+  bslib:
+    base_font: {google: "IBM Plex Sans"}
+    heading_font: {google: "IBM Plex Sans"}
+    code_font: {google: "IBM Plex Mono"}
+
+reference:
+  - title: "Public housing developments"
+    desc: Boundaries and metadata for NYCHA's public housing developments.
+    contents:
+      - nyc_developments_sf
+      - nyc_development_data_df
+  - title: "Residential addresses"
+    desc: All residential addresses in the NYCHA portfolio, with administrative and geographic identifiers.
+    contents:
+      - nyc_addresses_df
+      - nyc_addresses_sf
+  - title: "Housing maintenance code violations"
+    desc: HPD violations issued at NYCHA properties.
+    contents:
+      - nyc_violations_df
+  - title: "Community facilities and service centers"
+    desc: Community-facility directory and NYCHA-operated facilities.
+    contents:
+      - nyc_community_facilities_df
+      - nyc_community_facilities_sf
+      - nyc_facilities_df
+      - nyc_facilities_sf
+  - title: "Resident statistics"
+    desc: Aggregate resident summary statistics from the NYCHA Resident Data Book.
+    contents:
+      - nyc_resident_summary_df
+
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/kjhealy/nycha
+
+figures:
+  dev: grDevices::png
+  dpi: 300
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618

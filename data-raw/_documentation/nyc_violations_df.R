@@ -1,0 +1,51 @@
+#' Housing maintenance code violations on NYCHA properties
+#'
+#' Housing Maintenance Code violations issued by the NYC Department of
+#' Housing Preservation and Development (HPD) at NYCHA properties.
+#'
+#' @format ## `nyc_violations_df`
+#' A tibble with 3,475 rows and 35 columns:
+#' \describe{
+#'   \item{violation_id}{HPD violation ID.}
+#'   \item{primary_bin}{Primary Building Identification Number (BIN).}
+#'   \item{primary_boro_id}{Primary borough numeric identifier.}
+#'   \item{primary_borough_name}{Primary borough name (title case).}
+#'   \item{primary_house_number}{Primary house number on the violation record.}
+#'   \item{primary_low_house_number}{Low end of house-number range, if any.}
+#'   \item{primary_high_house_number}{High end of house-number range, if any.}
+#'   \item{primary_street_name}{Primary street name.}
+#'   \item{primary_postcode}{Primary ZIP code.}
+#'   \item{development_name}{NYCHA development name.}
+#'   \item{tds_number}{Tenant Data System (TDS) development number.}
+#'   \item{stairhall_number}{Stairhall number.}
+#'   \item{nycha_address_section_boro_id}{NYCHA address-section borough ID.}
+#'   \item{nycha_address_section_borough}{NYCHA address-section borough name.}
+#'   \item{nycha_address_section_house_number}{NYCHA address-section house number.}
+#'   \item{nycha_address_section_street_name}{NYCHA address-section street name.}
+#'   \item{nycha_address_section_post_code}{NYCHA address-section ZIP code.}
+#'   \item{apartment}{Apartment identifier within the building.}
+#'   \item{story}{Story (floor) of the violation.}
+#'   \item{block}{Tax block.}
+#'   \item{lot}{Tax lot.}
+#'   \item{violation_description}{Free-text description of the violation.}
+#'   \item{class}{Violation class: A (non-hazardous), B (hazardous),
+#'     or C (immediately hazardous).}
+#'   \item{inspection_date}{Date of inspection (`Date`).}
+#'   \item{approved_date}{Date the violation was approved (`Date`).}
+#'   \item{order_number}{Order number prefix indicating the section of the
+#'     Housing Maintenance Code that the violation pertains to.}
+#'   \item{issued_in_error}{Logical: whether the violation was later
+#'     determined to have been issued in error.}
+#'   \item{latitude}{Latitude (WGS 84).}
+#'   \item{longitude}{Longitude (WGS 84).}
+#'   \item{community_board}{Community Board.}
+#'   \item{council_district}{New York City Council district.}
+#'   \item{bin}{Building Identification Number (BIN).}
+#'   \item{bbl}{Borough-block-lot identifier.}
+#'   \item{census_tract_2020}{2020 Census tract.}
+#'   \item{nta_2020}{2020 Neighborhood Tabulation Area.}
+#' }
+#'
+#' @author Kieran Healy
+#' @source NYC OpenData: <https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations-NYCHA-Properti/2eg8-fkny>
+"nyc_violations_df"

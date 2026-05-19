@@ -1,0 +1,78 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  dpi = 300
+)
+```
+
+# nycha
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Spatial and tabular data about the New York City Housing Authority
+(NYCHA), including public housing development boundaries, residential
+addresses, the NYCHA Development Data Book, housing maintenance code
+violations on NYCHA properties, community facilities, service centers,
+and aggregate resident statistics.
+
+## Installation
+
+```r
+remotes::install_github("kjhealy/nycha")
+```
+
+## Load
+
+```{r load, message = FALSE}
+library(nycha)
+library(tidyverse)
+library(sf)
+```
+
+## What's included
+
+```{r objects}
+nyc_developments_sf
+nyc_addresses_df
+nyc_violations_df
+nyc_community_facilities_df
+nyc_facilities_df
+nyc_development_data_df
+nyc_resident_summary_df
+```
+
+## Example: total apartments and population by borough
+
+```{r summary}
+nyc_development_data_df |>
+  summarise(
+    developments = n(),
+    apartments = sum(total_number_of_apartments, na.rm = TRUE),
+    population = sum(total_population, na.rm = TRUE),
+    .by = borough
+  ) |>
+  arrange(desc(apartments))
+```
+
+## Example: map of NYCHA developments
+
+```{r map, fig.alt = "Map of New York City showing the locations and footprints of NYCHA public housing developments coloured by borough."}
+ggplot(nyc_developments_sf) +
+  geom_sf(aes(fill = borough), colour = NA) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "NYCHA public housing developments",
+    fill = NULL
+  ) +
+  theme_minimal()
+```

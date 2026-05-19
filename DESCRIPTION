@@ -1,0 +1,23 @@
+Package: nycha
+Title: Data on the New York City Housing Authority
+Version: 0.0.1.9000
+Authors@R:
+    person("Kieran", "Healy", , "kjhealy@protonmail.com", role = c("aut", "cre"))
+Description: Provides spatial and tabular data on the New York City
+    Housing Authority (NYCHA), including public housing developments,
+    residential addresses, the development data book, housing maintenance
+    code violations on NYCHA properties, community facilities, service
+    centers, and resident summary statistics.
+License: MIT + file LICENSE
+Depends:
+    R (>= 3.5)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+LazyData: true
+LazyDataCompression: xz
+URL: https://github.com/kjhealy/nycha
+BugReports: https://github.com/kjhealy/nycha/issues
+Suggests: 
+    sf (>= 1.0.0),
+    tibble (>= 3.0.0)
