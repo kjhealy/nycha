@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nycha
+# nycha <img src="man/figures/nycha.png" align="right" width="360">
 
 <!-- badges: start -->
 
