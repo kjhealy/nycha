@@ -14,7 +14,7 @@ nyc_addresses_df
 
 ### `nyc_addresses_df`
 
-A tibble with 2,955 rows and 26 columns:
+A tibble with 2,955 rows and 27 columns:
 
 - development:
 
@@ -58,7 +58,7 @@ A tibble with 2,955 rows and 26 columns:
 
 - zip_code:
 
-  ZIP code.
+  Five-digit ZIP code, e.g. `"10456"` (character).
 
 - bin:
 
@@ -70,7 +70,7 @@ A tibble with 2,955 rows and 26 columns:
 
 - lot:
 
-  Tax lot.
+  Tax lot (character).
 
 - bbl:
 
@@ -78,7 +78,17 @@ A tibble with 2,955 rows and 26 columns:
 
 - census_tract_2020:
 
-  2020 Census tract.
+  2020 census tract as given in the source (character). The source uses
+  two encodings. A whole tract has its label, e.g. `"145"` for
+  tract 145. A split tract has its six-digit tract code without the
+  leading zero, e.g. `"15101"` for tract 151.01. Use `tract_geoid` to
+  join to census data.
+
+- tract_geoid:
+
+  11-digit 2020 census tract GEOID (state, county, and tract), e.g.
+  `"36005014500"` (character). Assigned from `latitude` and `longitude`
+  with `nycmaps::nyc_census_tracts_2020_sf`.
 
 - nta_code:
 
@@ -110,8 +120,8 @@ A tibble with 2,955 rows and 26 columns:
 
 - privately_managed:
 
-  Logical: whether the property is privately managed under the Rental
-  Assistance Demonstration (RAD/PACT).
+  `TRUE` if the property is privately managed under the Rental
+  Assistance Demonstration (RAD/PACT), otherwise `FALSE` (logical).
 
 - latitude:
 
@@ -125,6 +135,17 @@ A tibble with 2,955 rows and 26 columns:
 
 NYC OpenData:
 <https://data.cityofnewyork.us/Housing-Development/NYCHA-Residential-Addresses/k6ya-3sk4>
+
+## Details
+
+The NYC Open Data export formats some identifier fields with thousands
+separators, e.g. ZIP code `"10,456"`. The separators are removed.
+
+The coordinates are address points at the building frontage: the median
+distance to the building footprint with the same BIN is about 3 feet.
+Points from other geocoders (e.g. 311) do not have the same coordinates.
+To match other data to NYCHA addresses, join on `bin` or `bbl`, on
+`zip_code` and `address`, or by distance to the building.
 
 ## Author
 

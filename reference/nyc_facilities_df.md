@@ -15,7 +15,7 @@ nyc_facilities_df
 
 ### `nyc_facilities_df`
 
-A tibble with 536 rows and 15 columns:
+A tibble with 536 rows and 16 columns:
 
 - borough:
 
@@ -39,7 +39,7 @@ A tibble with 536 rows and 15 columns:
 
 - postcode:
 
-  ZIP code.
+  Five-digit ZIP code (character).
 
 - type:
 
@@ -64,15 +64,24 @@ A tibble with 536 rows and 15 columns:
 
 - census_tract:
 
-  Census tract.
+  Census tract as given in the source (character), with the same two
+  encodings as `census_tract_2020` in
+  [nyc_addresses_df](https://kjhealy.github.io/nycha/reference/nyc_addresses_df.md).
+  Use `tract_geoid` to join to census data.
+
+- tract_geoid:
+
+  11-digit 2020 census tract GEOID (character). Assigned from `latitude`
+  and `longitude` with `nycmaps::nyc_census_tracts_2020_sf`. `NA` for
+  facilities without coordinates.
 
 - bin:
 
-  Building Identification Number (BIN).
+  Building Identification Number (BIN), seven digits (character).
 
 - bbl:
 
-  Borough-block-lot identifier.
+  Borough-block-lot identifier, ten digits (character).
 
 - nta:
 
@@ -88,6 +97,10 @@ NYC OpenData:
 Source data reflects NYCHA's property directory as of December 2012. Two
 commercial spaces in the directory are not part of the Facility Planning
 portfolio.
+
+The NYC Open Data export formats `bin`, `bbl`, and some `census_tract`
+values with thousands separators, e.g. BBL `"4,021,590,002"`. The
+separators are removed.
 
 ## Author
 
