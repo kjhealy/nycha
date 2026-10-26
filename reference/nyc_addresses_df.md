@@ -143,9 +143,21 @@ separators, e.g. ZIP code `"10,456"`. The separators are removed.
 
 The coordinates are address points at the building frontage: the median
 distance to the building footprint with the same BIN is about 3 feet.
-Points from other geocoders (e.g. 311) do not have the same coordinates.
-To match other data to NYCHA addresses, join on `bin` or `bbl`, on
-`zip_code` and `address`, or by distance to the building.
+Other geocoders place the same addresses differently. 311 service
+requests (`nyc311`) are geocoded to the street centerline: for 311
+requests at NYCHA addresses in 2022-2025, the 311 point is a median of
+26 m from the building, and about 100 m at the 90th percentile, because
+many NYCHA buildings are set back from the street in superblocks.
+Distance joins to these points, and point-in-polygon joins to
+[nyc_developments_sf](https://kjhealy.github.io/nycha/reference/nyc_developments_sf.md),
+miss most such records.
+
+To match other data to NYCHA addresses, join on `bbl` (`nyc311` has it
+from version 0.0.3.9000, `nycpluto` throughout), or on `bin` where the
+other data have it. Matching on `zip_code` and a normalized `address`
+(upper case, ordinal suffixes dropped, so `"12TH STREET"` becomes
+`"12 STREET"`) also works, but finds about 10% fewer 311 requests than
+`bbl`.
 
 ## Author
 

@@ -30,6 +30,14 @@ column.
 NYC OpenData:
 <https://data.cityofnewyork.us/Housing-Development/NYCHA-Residential-Addresses/k6ya-3sk4>
 
+## Details
+
+The points are at the building frontage and do not coincide with other
+geocoders' points for the same addresses, such as 311's
+street-centerline geocodes. See
+[nyc_addresses_df](https://kjhealy.github.io/nycha/reference/nyc_addresses_df.md)
+for how to match other data.
+
 ## Author
 
 Kieran Healy

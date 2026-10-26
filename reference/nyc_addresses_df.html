@@ -156,9 +156,19 @@ under the Rental Assistance Demonstration (RAD/PACT), otherwise
 separators, e.g. ZIP code <code>"10,456"</code>. The separators are removed.</p>
 <p>The coordinates are address points at the building frontage: the median
 distance to the building footprint with the same BIN is about 3 feet.
-Points from other geocoders (e.g. 311) do not have the same
-coordinates. To match other data to NYCHA addresses, join on <code>bin</code> or
-<code>bbl</code>, on <code>zip_code</code> and <code>address</code>, or by distance to the building.</p>
+Other geocoders place the same addresses differently. 311 service
+requests (<code>nyc311</code>) are geocoded to the street centerline: for 311
+requests at NYCHA addresses in 2022-2025, the 311 point is a median of
+26 m from the building, and about 100 m at the 90th percentile, because
+many NYCHA buildings are set back from the street in superblocks.
+Distance joins to these points, and point-in-polygon joins to
+<a href="nyc_developments_sf.html">nyc_developments_sf</a>, miss most such records.</p>
+<p>To match other data to NYCHA addresses, join on <code>bbl</code> (<code>nyc311</code> has it
+from version 0.0.3.9000, <code>nycpluto</code> throughout), or on <code>bin</code> where the
+other data have it. Matching on <code>zip_code</code> and a normalized <code>address</code>
+(upper case, ordinal suffixes dropped, so <code>"12TH STREET"</code> becomes
+<code>"12 STREET"</code>) also works, but finds about 10% fewer 311 requests than
+<code>bbl</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
