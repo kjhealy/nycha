@@ -5,7 +5,7 @@
 #' administrative boundary information.
 #'
 #' @format ## `nyc_addresses_df`
-#' A tibble with 2,955 rows and 26 columns:
+#' A tibble with 2,955 rows and 27 columns:
 #' \describe{
 #'   \item{development}{Development name.}
 #'   \item{tds_num}{Tenant Data System (TDS) development number.}
@@ -17,12 +17,19 @@
 #'   \item{address}{Full street address.}
 #'   \item{city}{Postal city (typically Bronx, Brooklyn, New York, etc.).}
 #'   \item{state}{State (NY).}
-#'   \item{zip_code}{ZIP code.}
+#'   \item{zip_code}{Five-digit ZIP code, e.g. `"10456"` (character).}
 #'   \item{bin}{Building Identification Number (BIN), Department of City Planning.}
 #'   \item{block}{Tax block.}
-#'   \item{lot}{Tax lot.}
+#'   \item{lot}{Tax lot (character).}
 #'   \item{bbl}{Borough-block-lot identifier (10-digit concatenation).}
-#'   \item{census_tract_2020}{2020 Census tract.}
+#'   \item{census_tract_2020}{2020 census tract as given in the source
+#'     (character). The source uses two encodings. A whole tract has its
+#'     label, e.g. `"145"` for tract 145. A split tract has its six-digit
+#'     tract code without the leading zero, e.g. `"15101"` for tract 151.01.
+#'     Use `tract_geoid` to join to census data.}
+#'   \item{tract_geoid}{11-digit 2020 census tract GEOID (state, county, and
+#'     tract), e.g. `"36005014500"` (character). Assigned from `latitude`
+#'     and `longitude` with `nycmaps::nyc_census_tracts_2020_sf`.}
 #'   \item{nta_code}{2020 Neighborhood Tabulation Area code.}
 #'   \item{nta_name}{2020 Neighborhood Tabulation Area name.}
 #'   \item{community_district}{Community District.}
@@ -30,11 +37,21 @@
 #'   \item{state_assembly_district}{New York State Assembly district.}
 #'   \item{state_senate_district}{New York State Senate district.}
 #'   \item{us_congressional_district}{U.S. Congressional district.}
-#'   \item{privately_managed}{Logical: whether the property is privately
-#'     managed under the Rental Assistance Demonstration (RAD/PACT).}
+#'   \item{privately_managed}{`TRUE` if the property is privately managed
+#'     under the Rental Assistance Demonstration (RAD/PACT), otherwise
+#'     `FALSE` (logical).}
 #'   \item{latitude}{Latitude (WGS 84).}
 #'   \item{longitude}{Longitude (WGS 84).}
 #' }
+#' @details
+#' The NYC Open Data export formats some identifier fields with thousands
+#' separators, e.g. ZIP code `"10,456"`. The separators are removed.
+#'
+#' The coordinates are address points at the building frontage: the median
+#' distance to the building footprint with the same BIN is about 3 feet.
+#' Points from other geocoders (e.g. 311) do not have the same
+#' coordinates. To match other data to NYCHA addresses, join on `bin` or
+#' `bbl`, on `zip_code` and `address`, or by distance to the building.
 #'
 #' @author Kieran Healy
 #' @source NYC OpenData: <https://data.cityofnewyork.us/Housing-Development/NYCHA-Residential-Addresses/k6ya-3sk4>
@@ -215,29 +232,39 @@
 #' etc.), including the five Community Operations borough offices.
 #'
 #' @format ## `nyc_facilities_df`
-#' A tibble with 536 rows and 15 columns:
+#' A tibble with 536 rows and 16 columns:
 #' \describe{
 #'   \item{borough}{New York City borough (title case).}
 #'   \item{development_name}{Associated NYCHA development.}
 #'   \item{address}{Street address.}
 #'   \item{status}{Facility status (e.g., \dQuote{Occupied}, \dQuote{Vacant}).}
 #'   \item{sponsor}{Sponsoring organization.}
-#'   \item{postcode}{ZIP code.}
+#'   \item{postcode}{Five-digit ZIP code (character).}
 #'   \item{type}{Facility type (e.g., community center, senior center,
 #'     day care, health center, commercial space).}
 #'   \item{latitude}{Latitude (WGS 84).}
 #'   \item{longitude}{Longitude (WGS 84).}
 #'   \item{community_board}{Community Board.}
 #'   \item{community_council}{Community Council district.}
-#'   \item{census_tract}{Census tract.}
-#'   \item{bin}{Building Identification Number (BIN).}
-#'   \item{bbl}{Borough-block-lot identifier.}
+#'   \item{census_tract}{Census tract as given in the source (character),
+#'     with the same two encodings as `census_tract_2020` in
+#'     [nyc_addresses_df]. Use `tract_geoid` to join to census data.}
+#'   \item{tract_geoid}{11-digit 2020 census tract GEOID (character).
+#'     Assigned from `latitude` and `longitude` with
+#'     `nycmaps::nyc_census_tracts_2020_sf`. `NA` for facilities without
+#'     coordinates.}
+#'   \item{bin}{Building Identification Number (BIN), seven digits (character).}
+#'   \item{bbl}{Borough-block-lot identifier, ten digits (character).}
 #'   \item{nta}{Neighborhood Tabulation Area.}
 #' }
 #' @details
 #' Source data reflects NYCHA's property directory as of December 2012.
 #' Two commercial spaces in the directory are not part of the Facility
 #' Planning portfolio.
+#'
+#' The NYC Open Data export formats `bin`, `bbl`, and some `census_tract`
+#' values with thousands separators, e.g. BBL `"4,021,590,002"`. The
+#' separators are removed.
 #'
 #' @author Kieran Healy
 #' @source NYC OpenData: <https://data.cityofnewyork.us/Housing-Development/NYCHA-Facilities-and-Service-Centers/d4iy-9uh7>
@@ -389,3 +416,4 @@
 #' @author Kieran Healy
 #' @source NYC OpenData: <https://data.cityofnewyork.us/Housing-Development/Housing-Maintenance-Code-Violations-NYCHA-Properti/2eg8-fkny>
 "nyc_violations_df"
+

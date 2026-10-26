@@ -1,6 +1,6 @@
 Package: nycha
 Title: Data on the New York City Housing Authority
-Version: 0.0.1.9000
+Version: 0.0.1.9001
 Authors@R:
     person("Kieran", "Healy", , "kjhealy@protonmail.com", role = c("aut", "cre"))
 Description: Provides spatial and tabular data on the New York City
@@ -13,11 +13,13 @@ Depends:
     R (>= 3.5)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 8.0.0
 LazyData: true
 LazyDataCompression: xz
 URL: https://github.com/kjhealy/nycha
 BugReports: https://github.com/kjhealy/nycha/issues
 Suggests: 
     sf (>= 1.0.0),
+    testthat (>= 3.0.0),
     tibble (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1

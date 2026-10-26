@@ -30,9 +30,12 @@ nyc_addresses_df <- read_csv(
     nta_name = neighborhood_tabulation_area_name
   ) |>
   mutate(
-    privately_managed = privately_managed == "YES",
+    across(c(zip_code, lot, census_tract_2020), strip_commas),
+    privately_managed = coalesce(privately_managed == "YES", FALSE),
     borough = str_to_title(borough)
   ) |>
+  add_tract_geoid() |>
+  relocate(tract_geoid, .after = census_tract_2020) |>
   as_tibble()
 
 usethis::use_data(nyc_addresses_df, overwrite = TRUE, compress = "xz")

@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{nyc_addresses_df}}{
 
-A tibble with 2,955 rows and 26 columns:
+A tibble with 2,955 rows and 27 columns:
 \describe{
 \item{development}{Development name.}
 \item{tds_num}{Tenant Data System (TDS) development number.}
@@ -19,12 +19,19 @@ A tibble with 2,955 rows and 26 columns:
 \item{address}{Full street address.}
 \item{city}{Postal city (typically Bronx, Brooklyn, New York, etc.).}
 \item{state}{State (NY).}
-\item{zip_code}{ZIP code.}
+\item{zip_code}{Five-digit ZIP code, e.g. \code{"10456"} (character).}
 \item{bin}{Building Identification Number (BIN), Department of City Planning.}
 \item{block}{Tax block.}
-\item{lot}{Tax lot.}
+\item{lot}{Tax lot (character).}
 \item{bbl}{Borough-block-lot identifier (10-digit concatenation).}
-\item{census_tract_2020}{2020 Census tract.}
+\item{census_tract_2020}{2020 census tract as given in the source
+(character). The source uses two encodings. A whole tract has its
+label, e.g. \code{"145"} for tract 145. A split tract has its six-digit
+tract code without the leading zero, e.g. \code{"15101"} for tract 151.01.
+Use \code{tract_geoid} to join to census data.}
+\item{tract_geoid}{11-digit 2020 census tract GEOID (state, county, and
+tract), e.g. \code{"36005014500"} (character). Assigned from \code{latitude}
+and \code{longitude} with \code{nycmaps::nyc_census_tracts_2020_sf}.}
 \item{nta_code}{2020 Neighborhood Tabulation Area code.}
 \item{nta_name}{2020 Neighborhood Tabulation Area name.}
 \item{community_district}{Community District.}
@@ -32,8 +39,9 @@ A tibble with 2,955 rows and 26 columns:
 \item{state_assembly_district}{New York State Assembly district.}
 \item{state_senate_district}{New York State Senate district.}
 \item{us_congressional_district}{U.S. Congressional district.}
-\item{privately_managed}{Logical: whether the property is privately
-managed under the Rental Assistance Demonstration (RAD/PACT).}
+\item{privately_managed}{\code{TRUE} if the property is privately managed
+under the Rental Assistance Demonstration (RAD/PACT), otherwise
+\code{FALSE} (logical).}
 \item{latitude}{Latitude (WGS 84).}
 \item{longitude}{Longitude (WGS 84).}
 }
@@ -49,6 +57,16 @@ nyc_addresses_df
 All residential addresses associated with NYCHA developments, including
 building, stairhall, and tax-lot identifiers, plus geographic and
 administrative boundary information.
+}
+\details{
+The NYC Open Data export formats some identifier fields with thousands
+separators, e.g. ZIP code \code{"10,456"}. The separators are removed.
+
+The coordinates are address points at the building frontage: the median
+distance to the building footprint with the same BIN is about 3 feet.
+Points from other geocoders (e.g. 311) do not have the same
+coordinates. To match other data to NYCHA addresses, join on \code{bin} or
+\code{bbl}, on \code{zip_code} and \code{address}, or by distance to the building.
 }
 \author{
 Kieran Healy

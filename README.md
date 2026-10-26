@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/kjhealy/nycha/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kjhealy/nycha/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Spatial and tabular data about the New York City Housing Authority
@@ -49,7 +50,7 @@ nyc_developments_sf
 #> 9                    ALBANY II     085  Brooklyn POLYGON ((1001913 184970.7,...
 #> 10                   AMSTERDAM     022 Manhattan POLYGON ((987777.1 221132.5...
 nyc_addresses_df
-#> # A tibble: 2,955 × 26
+#> # A tibble: 2,955 × 27
 #>    development       tds_num building_num stairhall_num borough house_num street
 #>    <chr>               <dbl> <chr>        <chr>         <chr>   <chr>     <chr> 
 #>  1 1162-1176 WASHIN…     233 1            003           Bronx   1162      WASHI…
@@ -63,12 +64,12 @@ nyc_addresses_df
 #>  9 ADAMS                 118 3            003           Bronx   720       WESTC…
 #> 10 ADAMS                 118 4            004           Bronx   721       TINTO…
 #> # ℹ 2,945 more rows
-#> # ℹ 19 more variables: address <chr>, city <chr>, state <chr>, zip_code <chr>,
+#> # ℹ 20 more variables: address <chr>, city <chr>, state <chr>, zip_code <chr>,
 #> #   bin <chr>, block <chr>, lot <chr>, bbl <chr>, census_tract_2020 <chr>,
-#> #   nta_code <chr>, nta_name <chr>, community_district <dbl>,
-#> #   city_council_district <dbl>, state_assembly_district <dbl>,
-#> #   state_senate_district <dbl>, us_congressional_district <dbl>,
-#> #   privately_managed <lgl>, latitude <dbl>, longitude <dbl>
+#> #   tract_geoid <chr>, nta_code <chr>, nta_name <chr>,
+#> #   community_district <dbl>, city_council_district <dbl>,
+#> #   state_assembly_district <dbl>, state_senate_district <dbl>,
+#> #   us_congressional_district <dbl>, privately_managed <lgl>, latitude <dbl>, …
 nyc_violations_df
 #> # A tibble: 3,475 × 35
 #>    violation_id primary_bin primary_boro_id primary_borough_name
@@ -109,7 +110,7 @@ nyc_community_facilities_df
 #> #   community_board <chr>, council_district <chr>, census_tract <chr>,
 #> #   bin <chr>, bbl <chr>, nta <chr>
 nyc_facilities_df
-#> # A tibble: 536 × 15
+#> # A tibble: 536 × 16
 #>    borough       development_name address status sponsor postcode type  latitude
 #>    <chr>         <chr>            <chr>   <chr>  <chr>   <chr>    <chr>    <dbl>
 #>  1 Manhattan     Baruch           595- 6… Occup… Henry … <NA>     Othe…       NA
@@ -123,9 +124,9 @@ nyc_facilities_df
 #>  9 Bronx         Pelham Parkway   975 Wa… Occup… Jewish… <NA>     Seni…       NA
 #> 10 Brooklyn      Pink             2702 L… Occup… United… <NA>     Othe…       NA
 #> # ℹ 526 more rows
-#> # ℹ 7 more variables: longitude <dbl>, community_board <chr>,
-#> #   community_council <dbl>, census_tract <chr>, bin <chr>, bbl <chr>,
-#> #   nta <chr>
+#> # ℹ 8 more variables: longitude <dbl>, community_board <chr>,
+#> #   community_council <dbl>, census_tract <chr>, tract_geoid <chr>, bin <chr>,
+#> #   bbl <chr>, nta <chr>
 nyc_development_data_df
 #> # A tibble: 346 × 52
 #>    data_as_of development       hud_amp_number tds_number consolidated_tds_num…¹

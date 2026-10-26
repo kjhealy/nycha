@@ -17,7 +17,12 @@ nyc_facilities_df <- read_csv(
   )
 ) |>
   clean_names() |>
-  mutate(borough = str_to_title(borough)) |>
+  mutate(
+    across(c(postcode, census_tract, bin, bbl), strip_commas),
+    borough = str_to_title(borough)
+  ) |>
+  add_tract_geoid() |>
+  relocate(tract_geoid, .after = census_tract) |>
   as_tibble()
 
 usethis::use_data(nyc_facilities_df, overwrite = TRUE, compress = "xz")
