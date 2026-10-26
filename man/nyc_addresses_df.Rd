@@ -76,8 +76,8 @@ To match other data to NYCHA addresses, join on \code{bbl} (\code{nyc311} has it
 from version 0.0.3.9000, \code{nycpluto} throughout), or on \code{bin} where the
 other data have it. Matching on \code{zip_code} and a normalized \code{address}
 (upper case, ordinal suffixes dropped, so \code{"12TH STREET"} becomes
-\code{"12 STREET"}) also works, but finds about 10\% fewer 311 requests than
-\code{bbl}.
+\code{"12 STREET"}) also works, but finds about 30\% fewer 311 requests than
+\code{bbl}: many NYCHA buildings have addresses that are not in this table.
 }
 \author{
 Kieran Healy

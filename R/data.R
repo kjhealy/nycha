@@ -61,8 +61,8 @@
 #' from version 0.0.3.9000, `nycpluto` throughout), or on `bin` where the
 #' other data have it. Matching on `zip_code` and a normalized `address`
 #' (upper case, ordinal suffixes dropped, so `"12TH STREET"` becomes
-#' `"12 STREET"`) also works, but finds about 10% fewer 311 requests than
-#' `bbl`.
+#' `"12 STREET"`) also works, but finds about 30% fewer 311 requests than
+#' `bbl`: many NYCHA buildings have addresses that are not in this table.
 #'
 #' @author Kieran Healy
 #' @source NYC OpenData: <https://data.cityofnewyork.us/Housing-Development/NYCHA-Residential-Addresses/k6ya-3sk4>
