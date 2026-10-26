@@ -13,6 +13,11 @@
 #'   \item{geometry}{Point geometry in EPSG:2263.}
 #' }
 #'
+#' @details
+#' The points are at the building frontage and do not coincide with other
+#' geocoders' points for the same addresses, such as 311's street-centerline
+#' geocodes. See [nyc_addresses_df] for how to match other data.
+#'
 #' @author Kieran Healy
 #' @source NYC OpenData: <https://data.cityofnewyork.us/Housing-Development/NYCHA-Residential-Addresses/k6ya-3sk4>
 "nyc_addresses_sf"

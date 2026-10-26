@@ -1,5 +1,9 @@
 # nycha 0.0.1.9001
 
+* `nyc_addresses_df` documents how its address points differ from 311's
+  street-centerline geocodes, and recommends joining on `bbl` (or `bin`)
+  rather than by distance or development polygon.
+
 * Identifier fields no longer contain thousands separators. The NYC Open
   Data exports format some identifier fields as numbers, e.g. ZIP code
   `"10,456"` and BBL `"4,021,590,002"`. This affected `zip_code`, `lot`,

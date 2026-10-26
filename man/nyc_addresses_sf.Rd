@@ -27,6 +27,11 @@ Point geometries for the NYCHA residential addresses in
 Coordinates reprojected to EPSG:2263, NAD83 / New York Long Island
 (ftUS).
 }
+\details{
+The points are at the building frontage and do not coincide with other
+geocoders' points for the same addresses, such as 311's street-centerline
+geocodes. See \link{nyc_addresses_df} for how to match other data.
+}
 \author{
 Kieran Healy
 }
